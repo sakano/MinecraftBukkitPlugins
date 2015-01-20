@@ -1,0 +1,17 @@
+name: UpdateInfo
+version: 0.1
+description: display update info
+author: sakano
+main: com.biscrat.minecraft.updateinfo.UpdateInfo
+
+commands:
+    prev:
+        description: display newer update infomation.
+        usage: /<command>
+    next:
+        description: display older update infomation.
+        usage: /<command>
+    updateinfo:
+        usage: /<command> reload
+        permission: updateinfo.reload
+        permission-message: You dont have the permission.
