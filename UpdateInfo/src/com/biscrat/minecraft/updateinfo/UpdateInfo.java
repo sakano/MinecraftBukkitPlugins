@@ -16,10 +16,11 @@ import java.util.Map;
 
 public class UpdateInfo extends JavaPlugin implements Listener {
 	private List<List<String>> updateInfo;
-	private Map<String, Integer> currentIndex;
+	private Map<String, Integer> currentIndex = new HashMap<>();
 
 	@Override
 	public void onEnable() {
+		saveDefaultConfig();
 		getServer().getPluginManager().registerEvents(this, this);
 		reload();
 	}
@@ -40,8 +41,7 @@ public class UpdateInfo extends JavaPlugin implements Listener {
 		reloadConfig();
 		FileConfiguration conf = getConfig();
 		updateInfo = getUpdateInfoConfig(conf);
-		currentIndex = new HashMap<>();
-		saveConfig();
+		currentIndex.clear();
 	}
 
 	@SuppressWarnings("unchecked")
@@ -50,46 +50,43 @@ public class UpdateInfo extends JavaPlugin implements Listener {
 	}
 
 	private boolean doUpdateInfoCommand(CommandSender sender, Command cmd, String[] args) {
-		if (cmd.getName().equalsIgnoreCase("UpdateInfo")) {
-			if (args.length >= 1 && args[0].equalsIgnoreCase("reload")) {
-				reload();
-				sender.sendMessage(ChatColor.GRAY + "UpdateInfo has been reloaded");
-			} else {
-				sender.sendMessage(ChatColor.GRAY + "use /updateinfo reload");
-			}
-			return true;
+		if (!cmd.getName().equalsIgnoreCase("UpdateInfo")) { return false; }
+		if (args.length >= 1 && args[0].equalsIgnoreCase("reload")) {
+			reload();
+			sender.sendMessage(ChatColor.GRAY + "UpdateInfo has been reloaded");
+		} else {
+			sender.sendMessage(ChatColor.GRAY + "use /updateinfo reload");
 		}
-		return false;
+		return true;
 	}
 
 	private boolean doPrevNextCommand(CommandSender sender, Command cmd) {
 		if (!(sender instanceof Player)) return false;
 
-		Player targetPlayer = ((Player) sender);
-		Integer index = currentIndex.get(targetPlayer.getName());
+		Integer index = currentIndex.get(sender.getName());
 		if (index == null) index = 0;
 		if (cmd.getName().equalsIgnoreCase("prev")) {
 			if (--index < 0) {
-				targetPlayer.sendMessage(ChatColor.GRAY + "これ以上更新情報はありません。");
+				sender.sendMessage(ChatColor.GRAY + "これ以上更新情報はありません。");
 			} else {
-				sendMessages(targetPlayer, index);
+				sendMessages(sender, index);
 			}
 			return true;
 		} else if (cmd.getName().equalsIgnoreCase("next")) {
 			if (++index >= updateInfo.size()) {
-				targetPlayer.sendMessage(ChatColor.GRAY + "これ以上更新情報はありません。");
+				sender.sendMessage(ChatColor.GRAY + "これ以上更新情報はありません。");
 			} else {
-				sendMessages(targetPlayer, index);
+				sendMessages(sender, index);
 			}
 			return true;
 		}
 		return false;
 	}
 
-	private void sendMessages(Player targetPlayer, Integer index) {
+	private void sendMessages(CommandSender sender, Integer index) {
 		List<String> info = updateInfo.get(index);
-		info.stream().forEach(s -> targetPlayer.sendMessage(ChatColor.translateAlternateColorCodes('&', s)));
-		targetPlayer.sendMessage(ChatColor.GRAY + "/nextコマンドで過去の更新情報を見れます。/prevで戻ります。");
-		currentIndex.put(targetPlayer.getName(), index);
+		info.forEach(s -> sender.sendMessage(ChatColor.translateAlternateColorCodes('&', s)));
+		sender.sendMessage(ChatColor.GRAY + "/nextコマンドで過去の更新情報を見れます。/prevで戻ります。");
+		currentIndex.put(sender.getName(), index);
 	}
 }
