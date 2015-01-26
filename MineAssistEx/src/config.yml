@@ -1,0 +1,90 @@
+global:
+    enable: true
+    usePermission: false
+tool:
+    list:
+    - DIAMOND_PICKAXE
+    - IRON_PICKAXE
+    - GOLD_PICKAXE
+    - STONE_PICKAXE
+    - WOOD_PICKAXE
+ore:
+    list:
+    - EMERALD_ORE
+    - DIAMOND_ORE
+    - GOLD_ORE
+    - IRON_ORE
+    - COAL_ORE
+    - LAPIS_ORE
+    - QUARTZ_ORE
+    - GLOWSTONE
+    - REDSTONE_ORE
+    - GLOWING_REDSTONE_ORE
+    EMERALD_ORE:
+        silkTouch: true
+        fortune: true
+        fortuneMultiply: true
+        fortuneMax: -1
+        sameTypes:
+        - EMERALD_ORE
+    DIAMOND_ORE:
+        silkTouch: true
+        fortune: true
+        fortuneMultiply: true
+        fortuneMax: -1
+        sameTypes:
+        - DIAMOND_ORE
+    GOLD_ORE:
+        silkTouch: false
+        fortune: false
+        sameTypes:
+        - GOLD_ORE
+    IRON_ORE:
+        silkTouch: false
+        fortune: false
+        sameTypes:
+        - IRON_ORE
+    COAL_ORE:
+        silkTouch: true
+        fortune: true
+        fortuneMultiply: true
+        fortuneMax: -1
+        sameTypes:
+        - COAL_ORE
+    LAPIS_ORE:
+        silkTouch: true
+        fortune: true
+        fortuneMultiply: true
+        fortuneMax: -1
+        sameTypes:
+        - LAPIS_ORE
+    QUARTZ_ORE:
+        silkTouch: true
+        fortune: true
+        fortuneMultiply: true
+        fortuneMax: -1
+        sameTypes:
+        - QUARTZ_ORE
+    GLOWSTONE:
+        silkTouch: true
+        fortune: true
+        fortuneMultiply: true
+        fortuneMax: 4
+        sameTypes:
+        - GLOWSTONE
+    REDSTONE_ORE:
+        silkTouch: true
+        fortune: true
+        fortuneMultiply: false
+        fortuneMax: -1
+        sameTypes:
+        - REDSTONE_ORE
+        - GLOWING_REDSTONE_ORE
+    GLOWING_REDSTONE_ORE:
+        silkTouch: true
+        fortune: true
+        fortuneMultiply: false
+        fortuneMax: -1
+        sameTypes:
+        - REDSTONE_ORE
+        - GLOWING_REDSTONE_ORE

@@ -1,0 +1,7 @@
+name: MineAssistEx
+main: com.biscrat.minecraft.mineassistex.MineAssistEx
+version: 0.1
+commands:
+   MineAssist:
+      description: MineAssistEx command.
+      usage: /<command> [ON/OFF/TOGGLE/RELOAD] <target>
