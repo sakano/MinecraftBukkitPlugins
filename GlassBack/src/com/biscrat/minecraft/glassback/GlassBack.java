@@ -20,7 +20,7 @@ public class GlassBack extends JavaPlugin implements Listener {
 	}
 
 	@SuppressWarnings("unused")
-	@EventHandler
+	@EventHandler(ignoreCancelled = true)
 	public void onBlockBreak(BlockBreakEvent ev) {
 		Player player = ev.getPlayer();
 		if (player.getGameMode() == GameMode.CREATIVE) return;
