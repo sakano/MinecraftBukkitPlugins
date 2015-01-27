@@ -1,6 +1,6 @@
 name: MineAssistEx
 main: com.biscrat.minecraft.mineassistex.MineAssistEx
-version: 0.1
+version: 0.2
 commands:
    MineAssist:
       description: MineAssistEx command.

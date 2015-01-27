@@ -45,9 +45,13 @@ public class MineAssistEx extends JavaPlugin {
 		final List<Material> ores = new LinkedList<>();
 		conf.getStringList("ore.list").forEach(str -> ores.add(Material.valueOf(str)));
 		for (final Material ore : ores) {
-			final DropData data = new DropData();
+			final DropData data = new DropData(this);
 			final String path = "ore." + ore.toString() + ".";
 			data.type = ore;
+			data.broadcast = conf.getBoolean(path + "broadcast", false);
+			data.broadcastText = conf.getString(path + "broadcastText", "<NAME> broke ore");
+			data.message = conf.getBoolean(path + "message", true);
+			data.messageText = conf.getString(path + "messageText", "<NUM> ore broken");
 			data.silkTouch = conf.getBoolean(path + "silkTouch", true);
 			data.fortune = conf.getBoolean(path + "fortune", true);
 			data.fortuneMultiply = conf.getBoolean(path + "fortuneMultiply", true);
@@ -63,7 +67,7 @@ public class MineAssistEx extends JavaPlugin {
 						&& args.length != 0
 						&& (doToggleCommand(sender, args[0]) || doReloadCommand(sender, args[0]));
 	}
-
+	
 	enum Permission {RELOAD, TOGGLE, MINE}
 
 	private boolean checkPermission(final CommandSender sender, final Permission permission, final boolean sendMessage) {
@@ -74,7 +78,7 @@ public class MineAssistEx extends JavaPlugin {
 
 	private boolean doToggleCommand(final CommandSender sender, final String arg) {
 		if (!arg.equalsIgnoreCase("on") && !arg.equalsIgnoreCase("off") && !arg.equalsIgnoreCase("toggle")) return false;
-		if (!checkPermission(sender, Permission.TOGGLE, true)) return false;
+		if (!checkPermission(sender, Permission.TOGGLE, true)) return true;
 
 		UserConfig conf;
 		if (sender instanceof Player) {
@@ -97,7 +101,7 @@ public class MineAssistEx extends JavaPlugin {
 
 	private boolean doReloadCommand(final CommandSender sender, final String arg) {
 		if (!arg.equalsIgnoreCase("reload")) return false;
-		if (!checkPermission(sender, Permission.RELOAD, true)) return false;
+		if (!checkPermission(sender, Permission.RELOAD, true)) return true;
 		reload();
 		sendMessage(sender, "Reloaded");
 		return true;
@@ -124,5 +128,13 @@ public class MineAssistEx extends JavaPlugin {
 
 	private void sendMessage(final CommandSender sender, final String message) {
 		sender.sendMessage(ChatColor.GRAY + "[MineAssistEx]" + message);
+	}
+
+	public void broadcast(final String message){
+		getServer().broadcastMessage(message);
+	}
+
+	public void message(final Player player, final String message) {
+		player.sendMessage(message);
 	}
 }

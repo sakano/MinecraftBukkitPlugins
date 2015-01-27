@@ -10,7 +10,6 @@ import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.ExperienceOrb;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
-import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.inventory.ItemStack;
@@ -29,7 +28,7 @@ public class BlockListener implements Listener {
 	}
 
 	@SuppressWarnings("unused")
-	@EventHandler(priority = EventPriority.HIGHEST, ignoreCancelled = true)
+	@EventHandler(ignoreCancelled = true)
 	public void onBlockBreak(final BlockBreakEvent ev) {
 		final DropData dropData = owner.getDropData(ev.getBlock().getType());
 		if (dropData == null) return;
@@ -55,16 +54,18 @@ public class BlockListener implements Listener {
 
 		final World world = player.getWorld();
 		final Integer exp = ev.getExpToDrop();
+		locations.remove(orgBlock.getLocation());
 		for (final Location location : locations) {
 			final Block block = world.getBlockAt(location);
 			final Collection<ItemStack> dropItems = block.getDrops(itemInHand);
-			Iterator<ItemStack> it = dropItems.iterator();
+			final Iterator<ItemStack> it = dropItems.iterator();
 			final ItemStack item = it.next();
 			it.forEachRemaining(i -> item.setAmount(item.getAmount() + i.getAmount()));
 			world.dropItemNaturally(location, dropItem.apply(item, itemInHand));
 			(world.spawn(location, ExperienceOrb.class)).setExperience(exp);
 			block.setType(Material.AIR);
 		}
+		dropData.notify(player, locations.size() + 1);
 	}
 
 	private final BlockFace[] faces = {BlockFace.NORTH, BlockFace.EAST, BlockFace.SOUTH, BlockFace.WEST, BlockFace.UP, BlockFace.DOWN};

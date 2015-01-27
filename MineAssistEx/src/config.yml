@@ -21,6 +21,10 @@ ore:
     - REDSTONE_ORE
     - GLOWING_REDSTONE_ORE
     EMERALD_ORE:
+        broadcast: true
+        broadcastText: "&a<NAME>が<NUM>個のエメラルドを発見しました"
+        message: false
+        messageText: "&7<NUM>個のエメラルドを破壊しました"
         silkTouch: true
         fortune: true
         fortuneMultiply: true
@@ -28,6 +32,10 @@ ore:
         sameTypes:
         - EMERALD_ORE
     DIAMOND_ORE:
+        broadcast: true
+        broadcastText: "&b<NAME>が<NUM>個のダイヤモンドを発見しました"
+        message: false
+        messageText: "&7<NUM>個のダイヤモンドを破壊しました"
         silkTouch: true
         fortune: true
         fortuneMultiply: true
@@ -35,16 +43,28 @@ ore:
         sameTypes:
         - DIAMOND_ORE
     GOLD_ORE:
+        broadcast: false
+        broadcastText: "&e<NAME>が<NUM>個の金を発見しました"
+        message: true
+        messageText: "&7<NUM>個の金を破壊しました"
         silkTouch: false
         fortune: false
         sameTypes:
         - GOLD_ORE
     IRON_ORE:
+        broadcast: false
+        broadcastText: "&7<NAME>が<NUM>個の鉄を発見しました"
+        message: true
+        messageText: "&7<NUM>個の鉄を破壊しました"
         silkTouch: false
         fortune: false
         sameTypes:
         - IRON_ORE
     COAL_ORE:
+        broadcast: false
+        broadcastText: "&8<NAME>が<NUM>個の石炭を発見しました"
+        message: true
+        messageText: "&7<NUM>個の石炭を破壊しました"
         silkTouch: true
         fortune: true
         fortuneMultiply: true
@@ -52,6 +72,10 @@ ore:
         sameTypes:
         - COAL_ORE
     LAPIS_ORE:
+        broadcast: false
+        broadcastText: "&9<NAME>が<NUM>個のラピスラズリを発見しました"
+        message: true
+        messageText: "&7<NUM>個のラピスラズリを破壊しました"
         silkTouch: true
         fortune: true
         fortuneMultiply: true
@@ -59,6 +83,10 @@ ore:
         sameTypes:
         - LAPIS_ORE
     QUARTZ_ORE:
+        broadcast: false
+        broadcastText: "&f<NAME>が<NUM>個のネザー水晶を発見しました"
+        message: true
+        messageText: "&7<NUM>個のネザー水晶を破壊しました"
         silkTouch: true
         fortune: true
         fortuneMultiply: true
@@ -66,6 +94,10 @@ ore:
         sameTypes:
         - QUARTZ_ORE
     GLOWSTONE:
+        broadcast: false
+        broadcastText: "&6<NAME>が<NUM>個のグロウストーンを発見しました"
+        message: true
+        messageText: "&7<NUM>個のグロウストーンを破壊しました"
         silkTouch: true
         fortune: true
         fortuneMultiply: true
@@ -73,6 +105,10 @@ ore:
         sameTypes:
         - GLOWSTONE
     REDSTONE_ORE:
+        broadcast: false
+        broadcastText: "&4<NAME>が<NUM>個のレッドストーンを発見しました"
+        message: true
+        messageText: "&7<NUM>個のレッドストーンを破壊しました"
         silkTouch: true
         fortune: true
         fortuneMultiply: false
@@ -81,6 +117,10 @@ ore:
         - REDSTONE_ORE
         - GLOWING_REDSTONE_ORE
     GLOWING_REDSTONE_ORE:
+        broadcast: false
+        broadcastText: "&4<NAME>が<NUM>個のレッドストーンを発見しました"
+        message: true
+        messageText: "&7<NUM>個のレッドストーンを破壊しました"
         silkTouch: true
         fortune: true
         fortuneMultiply: false
