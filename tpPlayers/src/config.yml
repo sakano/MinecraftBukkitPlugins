@@ -1,0 +1,4 @@
+info:
+    toWorld: world
+    fromWorlds:
+    - world

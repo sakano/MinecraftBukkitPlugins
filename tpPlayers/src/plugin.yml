@@ -1,0 +1,6 @@
+name: TpPlayers
+version: 0.1
+description: Teleport offline players in specified world
+author: sakano
+main: com.biscrat.minecraft.tpPlayers.TpPlayers
+
